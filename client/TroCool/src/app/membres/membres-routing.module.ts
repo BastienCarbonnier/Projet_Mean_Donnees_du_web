@@ -43,6 +43,10 @@ const routes: Routes = [
     {
         path: 'inscription',
         component: InscriptionComponent
+    },
+    {
+        path: '**',
+        redirectTo: 'propositions'
     }
 ];
 

@@ -15,7 +15,16 @@
                 <div>
                     Email : {{membre.email}}
                 </div>
-                <button class="btn btn-primary" (click)="notifierMembre(i)">Prévenir le membre</button>
+                <div *ngIf="membre.notifie == undefined || !membre.notifie">
+                    <p>Notifier le membre à chaque connexion</p>
+                    <button class="btn btn-primary" (click)="notifierMembre(membre._id)">Prévenir le membre</button>
+                </div>
+
+                <div *ngIf="membre.notifie != undefined && membre.notifie">
+                    <p>Arreter de notifier le membre à chaque connexion</p>
+                    <button class="btn btn-primary" (click)="arretNotifierMembre(membre._id)">Arreter notifications</button>
+                </div>
+
             </ng-template>
 
         </mat-expansion-panel>

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ListeServicesComponent } from './liste-services/liste-services.component';
 import { CreationServiceComponent } from './creation-service/creation-service.component';
-
+import { AuthGuardService } from '../auth-guard.service';
 const routes: Routes = [
     {
         path: '',
@@ -11,7 +11,12 @@ const routes: Routes = [
     },
     {
         path:'creation',
-        component: CreationServiceComponent
+        component: CreationServiceComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 

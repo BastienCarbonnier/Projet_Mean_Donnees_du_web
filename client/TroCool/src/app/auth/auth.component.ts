@@ -44,7 +44,8 @@ export class AuthComponent implements OnInit {
                     this.cookie.set('id', val.id);
                     this.cookie.set('admin', val.admin);
                     this.cookie.set('ratio', val.ratio);
-
+                    if (val.notifie != undefined && val.notifie)
+                        alert("L'administrateur vous notifie que votre ratio est trop bas.\n Attention votre compte risque d'être supprimer.");
                     this.router.navigateByUrl("/membre/propositions");
             }
             else{

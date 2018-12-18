@@ -23,6 +23,10 @@ export class ServicesService {
         return this.http.put<any>("http://localhost:8888/Services/emprunt", data);
     }
 
+    supprimerService(id): Observable<any> {
+        return this.http.delete<any>("http://localhost:8888/Services/"+String(id));
+    }
+
 
 
 }

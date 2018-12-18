@@ -23,10 +23,6 @@ export class ListeBiensComponent implements OnInit {
         });
     }
 
-    onSelect(){
-        console.log("details");
-    }
-
     reserverBien(idBien){
         if (this.auth.isLoggedIn){
             if (this.auth.id != this.biens[idBien]["idMembre"]){

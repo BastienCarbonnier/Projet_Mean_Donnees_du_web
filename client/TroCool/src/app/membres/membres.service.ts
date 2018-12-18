@@ -28,4 +28,8 @@ export class MembresService {
     getReservationsServicesMembre(id){
         return this.http.get("http://localhost:8888/Utilisations/Service/"+String(id));
     }
+
+    envoyerNotificationMembre(idMembre,val){
+        return this.http.put<any>("http://localhost:8888/Membres/", {"id": idMembre,"notifie": val});
+    }
 }

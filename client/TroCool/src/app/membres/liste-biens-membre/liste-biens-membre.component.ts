@@ -24,7 +24,6 @@ export class ListeBiensMembreComponent implements OnInit {
 
     supprimerBien(id){
         this.bien.supprimerBien(id).subscribe(res =>{
-            console.log("success");
             this.router.navigateByUrl("/membre/propositions");
         });
     }

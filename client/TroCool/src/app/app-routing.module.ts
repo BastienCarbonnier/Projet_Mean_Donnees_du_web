@@ -18,6 +18,10 @@ const routes: Routes = [
     {
         path: 'services',
         loadChildren: './services/services.module#ServicesModule'
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 

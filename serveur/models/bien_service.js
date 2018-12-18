@@ -9,7 +9,7 @@ var config = require('../ressource/config/config');
 
 
 var getBiensOrServicesByDateAndKeywords = function (db,collection,dateMin,dateMax,ordreDate,keywords,res,callbackglobal){
-    console.log(keywords);
+
 
     if (typeof keywords =="string"){
         let tab = [];
@@ -27,7 +27,7 @@ var getBiensOrServicesByDateAndKeywords = function (db,collection,dateMin,dateMa
         function(callback){
             if (keywords!=undefined && keywords.length != 0){
                 db.collection(collection).find({motsClefs: {$elemMatch:{ $in: keywords}}}).toArray((err, documents)=> {
-                    //console.log(documents);
+                    //
                     callback(null,documents);
                 });
             }
@@ -65,7 +65,7 @@ var getBiensOrServicesByDateAndKeywords = function (db,collection,dateMin,dateMa
 
             let dispoFinal = [];
             let newDoc = {};
-            //console.log(dispoParId);
+            //
             async.forEachOf(dispoParId, (value, key, callback_for) => {
                 newDoc = {};
                 let id = value["id"+collection.substring(0,collection.length-1)];
@@ -173,7 +173,7 @@ var getDispoForBiensOrServicesById = function(db,collection,id,dateMin,dateMax,c
     //{ projection: {'dates.$': 1}}
     db.collection("Disponibilites"+collection).find(filtre).toArray((err, documents)=> {
         let dates =[];
-        console.log(documents[0]);
+
         if(documents.length !== 0){
             async.forEachOf(documents[0].dates, (value, key, callbackFor) => {
                 let date = new Date(value.date);
@@ -403,7 +403,7 @@ var deleteBienOrServiceById = function(db,collection,id,callback){
         let filtre = {};
         filtre["id"+collection.substring(0,collection.length-1)] = parseInt(id);
 
-        db.collection("Disponibilites"+collection).deleteOne(filtre,function(err1, obj) {
+        db.collection("Disponibilites"+collection).deleteOne(filtre,function(err2, obj) {
             db.collection("Utilisations"+collection).deleteOne(filtre,function(err3, obj) {
                 if (err1||err2||err3) callback(true);
                 else callback(false);
@@ -419,7 +419,7 @@ var deleteBienOrServiceByIdMembre = function(db,collection,idMembre,callback){
     });
 };
 var empruntBienOrServiceById= function(db,collection,id,idMembre,params,callback){
-    //console.log(params);
+    //
     let dates = params.dates;
 
     let filtre = {};
@@ -429,10 +429,10 @@ var empruntBienOrServiceById= function(db,collection,id,idMembre,params,callback
 
         delete value.aff;
         filtre["dates.date"] = new Date(value.date);
-        console.log(filtre);
+
         db.collection("Disponibilites"+collection).find(filtre,{ projection: {'dates.$': 1}}).toArray((err, documents)=> {
 
-            console.log(documents);
+
 
             let filtreUpdate = {};
             filtreUpdate["id"+collection.substring(0,collection.length-1)] = id;
@@ -444,13 +444,13 @@ var empruntBienOrServiceById= function(db,collection,id,idMembre,params,callback
 
             newDate.matin = oldDate.matin;
             newDate.aprem = oldDate.aprem;
-            console.log(newDate);
+
             if(value.matin == true)
                 newDate.matin = false;
             if(value.aprem == true)
                 newDate.aprem = false;
 
-            console.log(newDate);
+
             db.collection("Disponibilites"+collection).updateOne(filtreUpdate,{ $pull: { dates: oldDate}},(err, count)=> {
                 db.collection("Disponibilites"+collection).updateOne(filtreUpdate,{ $addToSet: { "dates": newDate}});
                 db.collection("Membres").updateOne({"_id": idMembre},{ $inc: { ratio: -1}});

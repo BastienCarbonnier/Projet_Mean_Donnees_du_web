@@ -1,18 +1,18 @@
 /*jslint node: true */
 /*jshint esversion: 6 */
 /* jshint expr: true */
-var BienService = require('../models/bien_service');
+var Bien = require('../models/bien_service');
 var async = require("async");
 // Display list of all Biens.
 exports.bien_list = function(req, res) {
 
     if(req.query.idMembre !== undefined){
-        BienService.getBiensOrServicesAndDispo(req.app.locals.db,"Biens",parseInt(req.query.idMembre), (json)=>{
+        Bien.getBiensOrServicesAndDispo(req.app.locals.db,"Biens",parseInt(req.query.idMembre), (json)=>{
             res.json(json);
         });
     }
     else{
-        BienService.getBiensOrServicesAndDispo(req.app.locals.db,"Biens",undefined, (json)=>{
+        Bien.getBiensOrServicesAndDispo(req.app.locals.db,"Biens",undefined, (json)=>{
             res.json(json);
         });
     }
@@ -21,14 +21,14 @@ exports.bien_list = function(req, res) {
 
 exports.bien_get_dispo = function(req, res) {
 
-    BienService.getDispoForBiensOrServicesById(req.app.locals.db,"Biens",parseInt(req.params.id),req.query.dateMin,req.query.dateMax, (json)=>{
+    Bien.getDispoForBiensOrServicesById(req.app.locals.db,"Biens",parseInt(req.params.id),req.query.dateMin,req.query.dateMax, (json)=>{
         res.json(json);
     });
 
 };
 
 exports.emprunt_bien = function(req, res) {
-    BienService.empruntBienOrServiceById(req.app.locals.db,"Biens",parseInt(req.body.idBien),parseInt(req.body.idMembre),req.body, (json)=>{
+    Bien.empruntBienOrServiceById(req.app.locals.db,"Biens",parseInt(req.body.idBien),parseInt(req.body.idMembre),req.body, (json)=>{
         res.json(json);
     });
 };
@@ -36,7 +36,7 @@ exports.emprunt_bien = function(req, res) {
 exports.bien_research = function(req, res) {
 
     if (Object.keys(req.query).length === 0){
-        BienService.getCollectionByFiltre(req.app.locals.db,"Biens",{}, (json)=>{
+        Bien.getCollectionByFiltre(req.app.locals.db,"Biens",{}, (json)=>{
             res.json(json);
         });
     }
@@ -62,7 +62,7 @@ exports.bien_research = function(req, res) {
             ordreDate = req.query.ordreDate;
         }
 
-        BienService.getBiensOrServicesByDateAndKeywords(req.app.locals.db,"Biens",dateMin,dateMax,ordreDate,req.query.keywords,res, (err,biens) =>{
+        Bien.getBiensOrServicesByDateAndKeywords(req.app.locals.db,"Biens",dateMin,dateMax,ordreDate,req.query.keywords,res, (err,biens) =>{
             res.json(biens);
         });
     }
@@ -70,7 +70,7 @@ exports.bien_research = function(req, res) {
 
 // Display detail page for a specific Bien.
 exports.bien_detail = function(req, res) {
-    BienService.getCollectionByFiltre(req.app.locals.db,"Biens",{_id : parseInt(req.params.id)}, (json)=>{
+    Bien.getCollectionByFiltre(req.app.locals.db,"Biens",{_id : parseInt(req.params.id)}, (json)=>{
         res.json(json);
     });
 };
@@ -80,10 +80,10 @@ exports.bien_create = function(req, res) {
 
 
     let params = req.body;
-    console.log(params);
-    BienService.createBienOrService (req.app.locals.db,"Biens",params, (err,code)=>{
-        console.log(err);
-        console.log(code);
+
+    Bien.createBienOrService (req.app.locals.db,"Biens",params, (err,code)=>{
+
+
         if(!err){
             res.json({"err": false});
         }
@@ -97,7 +97,7 @@ exports.bien_create = function(req, res) {
 // Handle Bien delete.
 exports.bien_delete_by_id = function(req, res) {
 
-    BienService.deleteBienOrServiceById (req.app.locals.db,"Biens",req.params.id, (err,code)=>{
+    Bien.deleteBienOrServiceById (req.app.locals.db,"Biens",req.params.id, (err,code)=>{
         if(!err){
             res.json({"err": false});
         }
@@ -110,7 +110,7 @@ exports.bien_delete_by_id = function(req, res) {
 exports.bien_delete = function(req, res) {
 
     if (req.params.id != undefined){
-        BienService.deleteBienOrServiceById(req.app.locals.db,"Biens",parseInt(req.params.id), (err,code)=>{
+        Bien.deleteBienOrServiceById(req.app.locals.db,"Biens",parseInt(req.params.id), (err,code)=>{
             if(!err){
                 res.json({"err": false});
             }
@@ -120,7 +120,7 @@ exports.bien_delete = function(req, res) {
         });
     }
     else if(req.query.idMembre != undefined){
-        BienService.deleteBienOrServiceByIdMembre(req.app.locals.db,"Biens",req.query.idMembre, (err)=>{
+        Bien.deleteBienOrServiceByIdMembre(req.app.locals.db,"Biens",req.query.idMembre, (err)=>{
             if(!err){
                 res.send("Le document a bien été supprimé!");
             }
@@ -150,7 +150,7 @@ exports.bien_update = function(req, res) {
         id = req.params.id;
         delete body_params.id;
     }
-    BienService.updateBienOrServiceById (req.app.locals.db,"Biens",parseInt(id),body_params, (err,code)=>{
+    Bien.updateBienOrServiceById (req.app.locals.db,"Biens",parseInt(id),body_params, (err,code)=>{
         if(!err){
             res.end("Le document a bien été mis à jour!");
         }

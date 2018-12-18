@@ -11,7 +11,8 @@ var biens_controller = require('../controllers/biensController');
 router.put('/emprunt/',biens_controller.emprunt_bien);
 
 router.get('/dispo/:id/', biens_controller.bien_get_dispo);
-// GET request to show all bien.
+
+
 router.get('/', biens_controller.bien_list);
 
 // DELETE request to delete a bien.

@@ -36,7 +36,7 @@ exports.membre_create = function(req, res) {
             }
             delete response.role;
 
-            console.log(response);
+
             res.json(response);
         }
         else{
@@ -52,8 +52,8 @@ exports.membre_check_email_password = function(req, res) {
     let params = req.body;
 
     Membre.checkLoginAndPassword(req.app.locals.db,params,(result)=>{
-        console.log(params);
-        console.log(result);
+
+
         res.send(result);
     });
 
@@ -116,7 +116,7 @@ exports.membre_update = function(req, res) {
 
     if (id == undefined){
         if (body_params.email == undefined){
-            res.send("Erreur lors de la mis à jour : Email ou id non fournit");
+            res.json({"err": true, "code":"Erreur lors de la mis à jour : Email ou id non fournit"});
             return;
         }
         else{
@@ -124,10 +124,10 @@ exports.membre_update = function(req, res) {
             delete body_params.email;
             Membre.updateMembreByEmail(req.app.locals.db,body_params.email,body_params, (err,code)=>{
                 if(!err){
-                    res.send("Le document a membre été mis à jour!");
+                    res.json({"err": false});
                 }
                 else{
-                    res.send("Erreur lors de la mis à jour : "+code);
+                    res.json({"err": true, "code": code});
                 }
             });
         }
@@ -135,10 +135,10 @@ exports.membre_update = function(req, res) {
     else{
         Membre.updateMembreById(req.app.locals.db,parseInt(id),body_params, (err,code)=>{
             if(!err){
-                res.send("Le document a membre été mis à jour!");
+                res.json({"err": false});
             }
             else{
-                res.send("Erreur lors de la mis à jour : "+code);
+                res.json({"err": true, "code": code});
             }
         });
     }

@@ -28,6 +28,7 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 import { RechercheComponent } from './recherche/recherche.component';
+
 import { NotificationModule } from '@progress/kendo-angular-notification';
 
 

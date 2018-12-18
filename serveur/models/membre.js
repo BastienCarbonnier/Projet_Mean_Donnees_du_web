@@ -66,7 +66,7 @@ var isMembreInDatabaseByEmail = function (db,email,callback){
     let filtre = { email: { $eq: String(email) } };
     let collection = "Membres";
     db.collection(collection).find(filtre).toArray((err, documents)=> {
-        console.log(documents.length!==0);
+
         callback(documents.length!==0);
     });
 };
@@ -83,7 +83,7 @@ var checkLoginAndPassword = function (db,params,callback){
     let collection = "Membres";
 
     db.collection(collection).find(filtre).toArray((err, documents)=> {
-        console.log(documents);
+
         let admin = false;
         if (documents[0].role == "admin") admin=true;
         let result = {
@@ -93,7 +93,8 @@ var checkLoginAndPassword = function (db,params,callback){
             "admin" : admin,
             "nom": documents[0].nom,
             "prenom": documents[0].prenom,
-            "ratio": documents[0].ratio
+            "ratio": documents[0].ratio,
+            "notifie": documents[0].notifie
         };
         callback(result);
     });
@@ -104,7 +105,7 @@ var isMembreInDatabaseById = function (db,id,callback){
     let filtre = { _id: { $eq: parseInt(id) } };
     let collection = "Membres";
     db.collection(collection).find(filtre).toArray((err, documents)=> {
-        console.log(documents.length!==0);
+
         callback(documents.length!==0);
     });
 };

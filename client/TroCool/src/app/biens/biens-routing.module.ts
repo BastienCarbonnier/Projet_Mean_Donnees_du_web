@@ -15,6 +15,10 @@ const routes: Routes = [
         path:'creation',
         component: CreationBienComponent,
         canActivate: [AuthGuardService]
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 

@@ -62,10 +62,10 @@ exports.service_research = function(req, res) {
             ordreDate = req.query.ordreDate;
         }
 
-        console.log(req.query);
-        console.log(dateMin);
+
+
         Service.getBiensOrServicesByDateAndKeywords(req.app.locals.db,"Services",dateMin,dateMax,ordreDate,req.query.keywords,res, (err,services) =>{
-            console.log(err);
+
             res.json(services);
         });
     }
@@ -84,14 +84,16 @@ exports.service_detail = function(req, res) {
 exports.service_create = function(req, res) {
 
 
-    let params = req.query;
+    let params = req.body;
 
-    Service.createBienOrService(req.app.locals.db,"Services",params, (err,code)=>{
+    Service.createBienOrService (req.app.locals.db,"Services",params, (err,code)=>{
+
+
         if(!err){
-            res.send("Insertion réussi");
+            res.json({"err": false});
         }
         else{
-            res.send("Erreur lors de l'insertion "+code);
+            res.json({"err": true, "code": code});
         }
     });
 
@@ -100,12 +102,12 @@ exports.service_create = function(req, res) {
 // Handle Service delete.
 exports.service_delete_by_id = function(req, res) {
 
-    Bien.deleteBienOrServiceById(req.app.locals.db,"Services",req.params.id, (err)=>{
+    Service.deleteBienOrServiceById (req.app.locals.db,"Services",req.params.id, (err,code)=>{
         if(!err){
-            res.send("Le document a bien été supprimé!");
+            res.json({"err": false});
         }
         else{
-            res.send("Erreur lors de la suppression");
+            res.json({"err": true, "code": code});
         }
     });
 };
