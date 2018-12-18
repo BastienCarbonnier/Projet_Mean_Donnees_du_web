@@ -1,0 +1,46 @@
+db.Biens.aggregate([
+    { $match : {motClefs: {$elemMatch:{ $in: ["eau"]} }}},
+    { $lookup: {from:"DisponibilitesBiens",
+               localField: "_id",
+               foreignField: "idBien",
+               as: "DatesByBiens"}},
+    {$out : "DispoJoinBiens"}
+]).pretty();
+
+
+db.Biens.aggregate([
+    { $match : {motClefs: {$elemMatch:{ $in: ["eau"]} }}},
+    { $lookup: {from:"DisponibilitesBiens",
+               localField: "_id",
+               foreignField: "idBien",
+               as: "DatesByBiens"}},
+    {$unwind : "$DatesByBiens"},
+    { $project: {'DatesByBiens':true} },
+    {$out : "DispoJoinBiens"}
+]).pretty();
+
+db.DispoJoinBiens.aggregate([
+    {$unwind : "$DatesByBiens"},
+    {$match : {$and : [
+    {'DatesByBiens.dates.date': {$gte: ISODate("2018-11-12T00:00:00.000Z")}},
+    {'DatesByBiens.dates.date': {$lte: ISODate("2018-11-15T00:00:00.000Z")}}
+    ]}}
+]).pretty();
+
+
+
+db.DispoJoinBiens.find( { 'DatesByBiens.dates.date': {$lte: ISODate("2019-01-24T00:00:00.000Z")} } ,{'DatesByBiens.dates.$': 1, 'DatesByBiens.idBien' : 1})
+
+db.DispoJoinBiens.find({'DatesByBiens.dates.date': {$gte: ISODate("2018-11-12T00:00:00.000Z"),$lte: ISODate("2018-11-15T00:00:00.000Z")}}).pretty();
+
+db.DispoJoinBiens.find({'DatesByBiens.dates.date': {$eq: ISODate("2018-11-12T00:00:00.000Z")}}).pretty();
+
+db.DispoJoinBiens.find({'DatesByBiens.dates.date': {$gte: ISODate("2018-11-12T00:00:00.000Z"),$lte: ISODate("2018-11-15T00:00:00.000Z")}},{'DatesByBiens.dates.$': 1, 'DatesByBiens.idBien' : 1}).pretty();
+
+db.Biens.find({motClefs: {$elemMatch:{ $in: ["eau"]} }});
+db.DisponibilitesBiens.find({"_id":1}).pretty();
+ db.Biens.find({motClefs: {$elemMatch:{ $in: ["eau","voiture"]} }},{_id : 1}).pretty();
+
+db.DisponibilitesBiens.update({"idBien" : 1 , "dates.date": ISODate("2018-11-13T00:00:00.000Z")} , {$set: {"dates.$.matin": "Sa marche !"}})
+
+db.DisponibilitesBiens.update({"idBien" : 1 , "dates.matin": "Sa marche !"} , {$set: {"dates.$.matin": true}})

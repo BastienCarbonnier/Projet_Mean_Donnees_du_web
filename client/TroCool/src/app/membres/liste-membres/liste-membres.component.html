@@ -1,0 +1,16 @@
+<h3>Listes des Membres</h3>
+<div class="membres">
+  <a *ngFor="let membre of membres">
+    <div class="badge">
+      <h4>{{membre.prenom | titlecase}} {{membre.nom | uppercase}}</h4>
+      <div><span>id: </span>{{membre._id}}</div>
+      <div><span>email: </span>{{membre.email}}</div>
+      <div><span>role: </span>{{membre.role}}</div>
+    </div>
+    <div>
+      <label>email:
+        <input [(ngModel)]="membre.email" placeholder="email">
+      </label>
+    </div>
+  </a>
+</div>

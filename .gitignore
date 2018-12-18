@@ -1,0 +1,14 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/client/TroCool/dist
+/client/TroCool/tmp
+/client/TroCool/out-tsc
+
+# dependencies
+/client/TroCool/node_modules
+/serveur/node_modules
+
+# System Files
+.DS_Store
+Thumbs.db

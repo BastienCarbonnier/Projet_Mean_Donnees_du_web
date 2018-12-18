@@ -1,0 +1,37 @@
+[
+{
+    "idService": 2,
+    "dates" :
+        [{"date": new Date("2019-01-21T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2019-01-22T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2019-01-24T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2019-01-07T00:00:00.000Z"),
+        "matin": false,
+        "aprem":true},
+        {"date": new Date("2019-01-08T00:00:00.000Z"),
+        "matin": true,
+        "aprem":false},
+        {"date": new Date("2019-01-10T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+},
+{
+    "idService": 1,
+    "dates" :
+        [{"date": new Date("2019-01-21T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2019-01-22T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2019-01-24T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+}
+]

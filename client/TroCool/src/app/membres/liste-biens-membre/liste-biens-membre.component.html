@@ -1,0 +1,36 @@
+
+<h5>Mes Biens</h5>
+<h6 *ngIf="biens.length == 0">Aucun biens présents</h6>
+<mat-accordion class="biens">
+    <a *ngFor="let bien of biens; index as i">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{bien.nom | titlecase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Descriptif: {{bien.descriptif}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div><span>Id: </span>{{bien._id}}</div>
+            <div><span>Possesseur: </span>{{auth.prenom | titlecase}} {{auth.nom | titlecase}}</div>
+            <ng-template matExpansionPanelContent>
+                <div>
+                    <p>
+                        Créneaux :
+                    </p>
+                    <a *ngFor="let creneau of bien.dates">
+                        <div>
+                            <h6>{{creneau.date|date:"dd:LLL:yyyy"}}</h6>
+                            <span>{{creneau.matin ? ("Matin") : ""}}, {{creneau.aprem ? ("Après-midi") : ""}}</span>
+                        </div>
+                    </a>
+                </div>
+            </ng-template>
+            <div>
+                <button class="btn btn-primary" (click)="supprimerBien(bien._id)">Supprimer le bien</button>
+            </div>
+        </mat-expansion-panel>
+    </a>
+
+</mat-accordion>

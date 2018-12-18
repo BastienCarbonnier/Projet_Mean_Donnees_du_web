@@ -1,0 +1,18 @@
+[{
+    "_id": 1,
+    "idMembre":2,
+    "nom" :"Parapluie",
+    "descriptif" :"Vous protège de la pluie",
+    "lienPhoto" : "./ressource/photo/B1.jpeg",
+    "prixNeuf" : "15",
+    "motsClefs" : ["pluie","mauvais temps","parapluie","eau","mouillé"]
+},
+{
+    "_id": 2,
+    "idMembre":1,
+    "nom" :"Voiture Polo 4",
+    "descriptif" :"Pour vous déplacer facilement",
+    "lienPhoto" : "./ressource/photo/B2.jpeg",
+    "prixNeuf" : "17000",
+    "motsClefs" : ["deplacement","voiture","volkswagen","polo 4","diesel"]
+}]

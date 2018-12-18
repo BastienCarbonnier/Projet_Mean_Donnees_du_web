@@ -1,0 +1,30 @@
+<h5>Liste des Biens</h5>
+<mat-accordion class="biens">
+    <a *ngFor="let bien of biens; index as i">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{bien.nom | titlecase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Descriptif: {{bien.descriptif}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+                <div>
+                    DispoChoisi: {{dispoChoisi | json}}
+                </div>
+                <div>
+                    <p>Veuillez choisir les disponibilités qui vous conviennent : </p>
+                    <kendo-multiselect [data]="biens[i].dates"
+                    [(ngModel)]="dispoChoisi"
+                    [textField]="'aff'"
+                    [valueField]="'aff'"></kendo-multiselect>
+                </div>
+                <button class="btn btn-primary" (click)="reserverBien(i)">Réserver la selection</button>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </a>
+</mat-accordion>

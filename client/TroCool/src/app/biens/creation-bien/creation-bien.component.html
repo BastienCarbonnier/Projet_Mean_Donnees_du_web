@@ -1,0 +1,80 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>Création d'un bien</h1>
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" name="nom" [(ngModel)]="data.nom" #nom="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nom.invalid }" required nom />
+                        <div *ngIf="f.submitted && nom.invalid" class="invalid-feedback">
+                            <div *ngIf="nom.errors.required">Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descriptif">Descriptif</label>
+                        <textarea class="form-control" rows="3" name="descriptif" [(ngModel)]="data.descriptif" #descriptif="ngModel" [ngClass]="{ 'is-invalid': f.submitted && descriptif.invalid }" required descriptif></textarea>
+                        <!--<input type="text" class="form-control" name="descriptif" [(ngModel)]="data.descriptif" #descriptif="ngModel" [ngClass]="{ 'is-invalid': f.submitted && descriptif.invalid }" required descriptif />
+                            -->
+                        <div *ngIf="f.submitted && descriptif.invalid" class="invalid-feedback">
+                            <div *ngIf="descriptif.errors.required">Descriptif is required</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form name="formK" #fK="ngForm" novalidate>
+                            <input class="form-control" type="text" name="keyword" [(ngModel)]="newKeyword" #keyword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && keyword.invalid }" required keyword />
+                            <button class="btn btn-primary" (click)="addKeyword()">Ajouter Mot clef</button>
+                        </form>
+                        <ul class="keywords">
+                            <a *ngFor="let keyword of keywords; index as i">
+                                <li class="keyword">
+                                    <span class="close" aria-label="Close"(click)="deleteKeyword(i)">
+                                        <span aria-hidden="true" >  &times;</span>
+                                    </span>
+                                    <span >{{keyword}}</span>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <form #formDate="ngForm">
+                            <kendo-calendar
+                            #dispo
+                            name="dispo"
+                            [(ngModel)]="currentDate"
+                            (valueChange)="handleChange($event)"
+                            ></kendo-calendar>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="matin" [(ngModel)]="matin">
+                                <label class="form-check-label" for="matin">Matin</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="aprem" [(ngModel)]="aprem">
+                                <label class="form-check-label" for="aprem">Après-midi</label>
+                            </div>
+                            <ul class="dates">
+                                <a *ngFor="let dispo of dispos; index as i">
+                                    <li class="date">
+                                        <span class="close" aria-label="Close"(click)="deleteDispo(i)">
+                                            <span aria-hidden="true" >  &times;</span>
+                                        </span>
+                                        <span >{{dispo.date|date:"dd:LLL:yyyy"}} : matin = {{dispo.matin ? ("Oui") : "Non"}}, après-midi = {{dispo.aprem ? ("Oui") : "Non"}}</span>
+                                    </li>
+                                </a>
+                            </ul>
+                            <button class="btn btn-primary" (click)="addDate()">Ajouter Date</button>
+
+                        </form>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary">Création du bien</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

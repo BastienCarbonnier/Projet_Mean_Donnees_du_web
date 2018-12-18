@@ -1,0 +1,20 @@
+
+<h5>Mes Services</h5>
+
+<h6 *ngIf="services.length == 0">Aucun services présents</h6>
+<mat-accordion class="services">
+    <a *ngFor="let service of services">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{service.nom | titlecase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Descriptif: {{service.descriptif}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div><span>Id: </span>{{service._id}}</div>
+            <div><span>Possesseur: </span>{{auth.prenom | titlecase}} {{auth.nom | titlecase}}</div>
+        </mat-expansion-panel>
+    </a>
+</mat-accordion>

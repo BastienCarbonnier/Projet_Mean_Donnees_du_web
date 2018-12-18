@@ -1,0 +1,55 @@
+<header>
+    <mat-toolbar color="primary"><h1>Trocool / Site de trocs</h1></mat-toolbar>
+</header>
+
+<section class="container">
+    <div class="row">
+        <mat-card class="col-md-12">
+            <app-auth></app-auth>
+        </mat-card>
+    </div>
+
+    <nav class="row navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink="">Page d'accueil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="biens">Biens</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="services">Services</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mon compte
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" routerLink="membre/biens">Mes Biens</a>
+                        <a class="dropdown-item" routerLink="membre/services">Mes Services</a>
+                        <a class="dropdown-item" routerLink="membre/propositions">Mes Propositions</a>
+                        <a class="dropdown-item" routerLink="biens/creation">Proposer un bien</a>
+                        <a class="dropdown-item" routerLink="membre/reservations">Mes Reservations</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <mat-card class="col-md-12 d-block d-xs-none">
+            <router-outlet></router-outlet>
+        </mat-card>
+    </div>
+
+</section>
+<footer></footer>
+
+<!--
+<div class="row">
+    <mat-card class="col-md-12 d-block d-xs-none">
+
+    </mat-card>
+</div>
+-->

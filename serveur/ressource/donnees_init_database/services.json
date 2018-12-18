@@ -1,0 +1,16 @@
+[{
+    "_id": 1,
+    "idMembre":1,
+    "nom" :"Cours d'informatique",
+    "descriptif" :"Je peux vous donner des cours d'informatiques de difficulté débutant à confirmé",
+    "prix" : "40",
+    "motsClefs" : ["cours","informatique","debutant","confirmé"]
+},
+{
+    "_id": 2,
+    "idMembre":2,
+    "nom" :"Cours de cuisine",
+    "descriptif" :"Pour apprendre à faire des plats très bons et pas cher",
+    "prixNeuf" : "30",
+    "motsClefs" : ["cuisine","delicieux","plats","cours","apprentissage"]
+}]

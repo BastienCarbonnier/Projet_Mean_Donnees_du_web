@@ -1,0 +1,66 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>Inscription</h1>
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" name="prenom" [(ngModel)]="data.prenom" #prenom="ngModel" [ngClass]="{ 'is-invalid': f.submitted && prenom.invalid }" required prenom />
+                        <div *ngIf="f.submitted && prenom.invalid" class="invalid-feedback">
+                            <div *ngIf="prenom.errors.required">First name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" name="nom" [(ngModel)]="data.nom" #nom="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nom.invalid }" required nom />
+                        <div *ngIf="f.submitted && nom.invalid" class="invalid-feedback">
+                            <div *ngIf="nom.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" [(ngModel)]="data.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                        <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Numéro de téléphone</label>
+                        <input type="text" class="form-control" name="telephone" [(ngModel)]="data.telephone" #telephone="ngModel" [ngClass]="{ 'is-invalid': f.submitted && telephone.invalid }"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Adresse</label>
+                        <input type="text" class="form-control" name="adresse" [(ngModel)]="data.adresse" #adresse="ngModel" [ngClass]="{ 'is-invalid': f.submitted && adresse.invalid }" required adresse />
+                        <div *ngIf="f.submitted && adresse.invalid" class="invalid-feedback">
+                            <div *ngIf="adresse.errors.required">Address is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input type="text" class="form-control" name="ville" [(ngModel)]="data.ville" #ville="ngModel" [ngClass]="{ 'is-invalid': f.submitted && ville.invalid }" required ville />
+                        <div *ngIf="f.submitted && ville.invalid" class="invalid-feedback">
+                            <div *ngIf="ville.errors.required">City is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="data.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+                        <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary">Inscription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

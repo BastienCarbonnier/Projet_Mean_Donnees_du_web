@@ -1,0 +1,22 @@
+<h4>Mes Reservations de Services</h4>
+<mat-accordion class="reservations">
+    <a *ngFor="let resa of resa_services">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h6>{{resa.nom}}</h6>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{resa.descriptif}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <a *ngFor="let creneau of resa.creneaux">
+                    <div>
+                        <h6>{{creneau.date|date:"dd:LLL:yyyy"}}</h6>
+                        <span>{{creneau.matin ? ("Matin") : ""}} {{creneau.aprem ? ("Après-midi") : ""}}</span>
+                    </div>
+                </a>
+            </mat-expansion-panel>
+    </a>
+
+</mat-accordion>

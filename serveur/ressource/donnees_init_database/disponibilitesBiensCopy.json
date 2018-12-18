@@ -1,0 +1,92 @@
+[
+{
+    "idBien": 1,
+    "annee" : 2018,
+    "numSemaine" : 42,
+    "dates" :
+        [{"date": new Date("2018-10-15T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2018-10-16T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2018-10-18T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+},
+{
+    "idBien": 1,
+    "annee" : 2018,
+    "numSemaine" : 44,
+    "dates" :
+        [{"date": new Date("2018-10-29T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2018-10-30T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2018-11-01T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+},
+{
+    "idBien": 1,
+    "annee" : 2018,
+    "numSemaine" : 46,
+    "dates" :
+        [{"date": new Date("2018-11-12T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2018-11-13T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true },
+        {"date": new Date("2018-11-15T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+},
+{
+    "idBien": 1,
+    "annee" : 2019,
+    "numSemaine" : 2,
+    "dates" :
+        [{"date": new Date("2019-01-07T00:00:00.000Z"),
+        "matin": false,
+        "aprem":true},
+        {"date": new Date("2019-01-08T00:00:00.000Z"),
+        "matin": true,
+        "aprem":false},
+        {"date": new Date("2019-01-10T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+},
+{
+    "idBien": 2,
+    "annee" : 2019,
+    "numSemaine" : 2,
+    "dates" :
+        [{"date": new Date("2019-01-07T00:00:00.000Z"),
+        "matin": false,
+        "aprem":true},
+        {"date": new Date("2019-01-08T00:00:00.000Z"),
+        "matin": true,
+        "aprem":false},
+        {"date": new Date("2019-01-10T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+},
+{
+    "idBien": 2,
+    "annee" : 2019,
+    "numSemaine" : 4,
+    "dates" :
+        [{"date": new Date("2019-01-21T00:00:00.000Z"),
+        "matin": true,
+        "aprem":false },
+        {"date": new Date("2019-01-22T00:00:00.000Z"),
+        "matin": false,
+        "aprem":true },
+        {"date": new Date("2019-01-24T00:00:00.000Z"),
+        "matin": true,
+        "aprem":true }]
+}
+]

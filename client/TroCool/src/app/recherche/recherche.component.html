@@ -1,0 +1,120 @@
+
+
+
+<h1>Espace de recherche</h1>
+<form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+    <div class="form-group">
+        <label for="texte">Texte à rechercher</label>
+        <input type="text" class="form-control" name="texte" [(ngModel)]="texte" #nom="ngModel"/>
+    </div>
+    <div class="form-group">
+        <span>Date Min  </span>
+        <kendo-datepicker
+        [format]="'dd-MMM-yyyy'"
+        [(value)]="dateMin"
+        ></kendo-datepicker>
+    </div>
+
+    <div class="form-group">
+        <span>Date Max  </span>
+        <kendo-datepicker
+        [format]="'dd-MMM-yyyy'"
+        [(value)]="dateMax"
+        ></kendo-datepicker>
+    </div>
+
+    <div class="form-group">
+        <form name="formK" #fK="ngForm" novalidate>
+            <input class="form-control" type="text" name="keyword" [(ngModel)]="newKeyword" #keyword="ngModel"/>
+            <button class="btn btn-primary" (click)="addKeyword()">Ajouter Mot clef</button>
+        </form>
+        <ul class="keywords">
+            <a *ngFor="let keyword of keywords; index as i">
+                <li class="keyword">
+                    <span class="close" aria-label="Close"(click)="deleteKeyword(i)">
+                        <span aria-hidden="true" >  &times;</span>
+                    </span>
+                    <span >{{keyword}}</span>
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <mat-radio-group class="radio-group" [(ngModel)]="currentChoice" [ngModelOptions]="{standalone: true}">
+        <mat-radio-button *ngFor="let choice of choices" [value]="choice">
+            {{choice}}
+        </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Lancer la recherche</button>
+
+    </div>
+    <div class="errors" *ngIf="errors">Texte ou mots clefs requis</div>
+</form>
+
+<h1>Résultat de la recherche</h1>
+
+<mat-accordion class="biens" *ngIf="chooseBiens">
+    <h5 *ngIf="biens.length == 0">Aucun biens ne correspond à vos critères</h5>
+    <h3 *ngIf="biens.length != 0">Bien trouvés</h3>
+    <a *ngFor="let bien of biens; index as i">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{bien.nom | titlecase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Descriptif: {{bien.descriptif}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+                <div>
+                    DispoChoisi: {{dispoChoisi | json}}
+                </div>
+                <div>
+                    <p>Veuillez choisir les disponibilités qui vous conviennent : </p>
+                    <kendo-multiselect [data]="biens[i].dates"
+                    [(ngModel)]="dispoChoisi"
+                    [textField]="'aff'"
+                    [valueField]="'aff'"></kendo-multiselect>
+                </div>
+                <button class="btn btn-primary" (click)="reserverBien(i,bien._id)">Réserver la selection</button>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </a>
+</mat-accordion>
+
+<mat-accordion *ngIf="chooseServices">
+    <h5 *ngIf="services.length == 0">Aucun services ne correspond à vos critères</h5>
+    <h3 *ngIf="services.length != 0">Services trouvés</h3>
+    <a *ngFor="let service of services; index as i">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{service.nom | titlecase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Descriptif: {{service.descriptif}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+                <div>
+                    DispoChoisi: {{dispoChoisi | json}}
+                </div>
+                <div>
+                    <p>Veuillez choisir les disponibilités qui vous conviennent : </p>
+                    <kendo-multiselect [data]="services[i].dates"
+                    [(ngModel)]="dispoChoisi"
+                    [textField]="'aff'"
+                    [valueField]="'aff'"></kendo-multiselect>
+                </div>
+                <button class="btn btn-primary" (click)="reserverService(i,service._id)">Réserver la selection</button>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </a>
+</mat-accordion>

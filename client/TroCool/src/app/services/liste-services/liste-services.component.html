@@ -1,0 +1,31 @@
+<h5>Liste des Services</h5>
+<mat-accordion class="services">
+    <a *ngFor="let service of services; index as i">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{service.nom | titlecase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Descriptif: {{service.descriptif}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+                <div>
+                    DispoChoisi: {{dispoChoisi | json}}
+                </div>
+                <div>
+                    <p>Veuillez choisir les disponibilités qui vous conviennent : </p>
+                    <kendo-multiselect [data]="services[i].dates"
+                    [(ngModel)]="dispoChoisi"
+                    [textField]="'aff'"
+                    [valueField]="'aff'"></kendo-multiselect>
+                </div>
+                <button class="btn btn-primary" (click)="reserverService(i)">Réserver la selection</button>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </a>
+
+</mat-accordion>

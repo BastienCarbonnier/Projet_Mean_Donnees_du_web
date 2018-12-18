@@ -1,0 +1,32 @@
+[{
+    "_id" : 1,
+    "email": "bca@gmail.com",
+    "password" : "facile",
+    "nom" :"carbonnier",
+    "prenom" :"bastien",
+    "role" : "admin",
+    "ville" : "Montpellier",
+    "adresse" : "169 impasse philippe de champaigne",
+    "telephone" : "0679174305"
+},
+{
+    "_id" : 2,
+    "email": "cgo@gmail.com",
+    "password" : "facile",
+    "nom" :"gosset",
+    "prenom" :"camille",
+    "role" : "user",
+    "ville" : "Montpellier",
+    "adresse" : "43 rue Macdalena",
+    "telephone" : "0678243021"
+},
+{
+    "_id" : 3,
+    "email": "tge@gmail.com",
+    "password": "facile",
+    "nom": "George",
+    "prenom": "Thomas",
+    "role": "user",
+    "ville": "Rodez"
+}
+]
