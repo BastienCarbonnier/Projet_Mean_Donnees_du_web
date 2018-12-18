@@ -278,9 +278,27 @@ var getBiensOrServicesAndDispo = function(db,collection,idMembre,callback){
                     }
                     callbackFor2();
                 }, err => {
-
+                    let filtre2 ={};
+                    filtre2["id"+collection.substring(0,collection.length-1)] = value._id;
                     biens[key].dates = dates;
-                    callbackFor();
+                    biens[key].dates_loue = [];
+
+                    db.collection("Utilisations"+collection).find(filtre2).toArray((err, documents)=> {
+                        if (documents != undefined){
+                            async.forEachOf(documents, (value, key2, callbackFor3) => {
+                                if(value.creneaux != undefined){
+                                    Array.prototype.push.apply(biens[key].dates_loue,value.creneaux);
+                                }
+
+                                callbackFor3();
+                            }, err => {
+                                callbackFor();
+                            });
+
+                        }
+
+                    });
+
                 });
             });
 
@@ -343,7 +361,7 @@ var createBienOrService = function (db,collection,params,callback){
                     let date;
                     async.forEachOf(params.dates, (value, key, callback) => {
                         date = {};
-                        date.date = value.date;//new Date(value.date);
+                        date.date = new Date(value.date);
                         date.matin = true;
                         date.aprem = true;
                         dates.push(date);
@@ -381,9 +399,16 @@ var createBienOrService = function (db,collection,params,callback){
 
 var deleteBienOrServiceById = function(db,collection,id,callback){
 
-    db.collection(collection).deleteOne({ _id: parseInt(id) },function(err, obj) {
-        if (err) callback(true);
-        else callback(false);
+    db.collection(collection).deleteOne({ _id: parseInt(id) },function(err1, obj) {
+        let filtre = {};
+        filtre["id"+collection.substring(0,collection.length-1)] = parseInt(id);
+
+        db.collection("Disponibilites"+collection).deleteOne(filtre,function(err1, obj) {
+            db.collection("Utilisations"+collection).deleteOne(filtre,function(err3, obj) {
+                if (err1||err2||err3) callback(true);
+                else callback(false);
+            });
+        });
     });
 };
 
@@ -404,13 +429,16 @@ var empruntBienOrServiceById= function(db,collection,id,idMembre,params,callback
 
         delete value.aff;
         filtre["dates.date"] = new Date(value.date);
-
+        console.log(filtre);
         db.collection("Disponibilites"+collection).find(filtre,{ projection: {'dates.$': 1}}).toArray((err, documents)=> {
+
+            console.log(documents);
 
             let filtreUpdate = {};
             filtreUpdate["id"+collection.substring(0,collection.length-1)] = id;
             // {"idBien" : 1} {$pull:{dates: ISODate("2041-01-24T00:00:00.000Z")}}
             let newDate ={};
+
             let oldDate = documents[0].dates[0];
             newDate.date = new Date(value.date);
 
@@ -425,7 +453,13 @@ var empruntBienOrServiceById= function(db,collection,id,idMembre,params,callback
             console.log(newDate);
             db.collection("Disponibilites"+collection).updateOne(filtreUpdate,{ $pull: { dates: oldDate}},(err, count)=> {
                 db.collection("Disponibilites"+collection).updateOne(filtreUpdate,{ $addToSet: { "dates": newDate}});
+                db.collection("Membres").updateOne({"_id": idMembre},{ $inc: { ratio: -1}});
+
+                db.collection(collection).find({"_id": id}).toArray((err, documents)=> {
+                    db.collection("Membres").updateOne({"_id": documents[0].idMembre},{ $inc: { ratio: 1}});
+                });
                 addUtilisation(db,collection,id,idMembre,oldDate,value, (res)=>{
+
                 });
             });
         });
@@ -447,12 +481,12 @@ var addUtilisation = function(db,collection,id,idBeneficiaire,oldDate,newDate,ca
     oldDate.matin = !oldDate.matin;
     oldDate.aprem = !oldDate.aprem;
     db.collection("Utilisations"+collection).find(filtre).toArray((err, documents)=> {
-        console.log(documents);
+
         if (documents.length != 0){
 
             db.collection("Utilisations"+collection).updateOne(filtre,{ $pull: { creneaux: oldDate}},(err, count)=> {
                 db.collection("Utilisations"+collection).updateOne(filtre,{ $addToSet: { "creneaux": newDate}},(err2, count2)=> {
-                    console.log(count2);
+
                 });
             });
 

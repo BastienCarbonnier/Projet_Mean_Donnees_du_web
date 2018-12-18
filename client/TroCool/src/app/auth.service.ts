@@ -13,6 +13,7 @@ export class AuthService {
     public prenom;
     public id;
     public admin;
+    public ratio;
 
     constructor(public http: HttpClient) { }
 

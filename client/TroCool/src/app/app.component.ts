@@ -20,7 +20,8 @@ export class AppComponent {
             this.auth.nom = this.cookie.get('nom');
             this.auth.prenom = this.cookie.get('prenom');
             this.auth.id = parseInt(this.cookie.get('id'));
-            this.auth.admin = this.cookie.check('admin') ? true : false;
+            this.auth.ratio = parseInt(this.cookie.get('ratio'));
+            this.auth.admin = (this.cookie.get('admin') =="true")  ? true : false;
         }
 
 

@@ -13,23 +13,31 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div><span>Id: </span>{{bien._id}}</div>
-            <div><span>Possesseur: </span>{{auth.prenom | titlecase}} {{auth.nom | titlecase}}</div>
             <ng-template matExpansionPanelContent>
                 <div>
-                    <p>
-                        Créneaux :
-                    </p>
+                    <h6>Créneaux Disponibles :</h6>
                     <a *ngFor="let creneau of bien.dates">
                         <div>
-                            <h6>{{creneau.date|date:"dd:LLL:yyyy"}}</h6>
-                            <span>{{creneau.matin ? ("Matin") : ""}}, {{creneau.aprem ? ("Après-midi") : ""}}</span>
+                            <div class="date"><span>{{creneau.date|date:"dd:LLL:yyyy"}}</span></div>
+                            <span>{{creneau.matin ? ("Matin") : ""}} {{creneau.aprem ? ("Après-midi") : ""}}</span>
                         </div>
                     </a>
                 </div>
+
+                <div>
+                    <h6>Créneaux Occupés :</h6>
+                    <a *ngFor="let loue of bien.dates_loue">
+                        <div>
+                            <div class="date"><span>{{loue.date|date:"dd:LLL:yyyy"}}</span></div>
+                            <span>{{loue.matin ? ("Matin") : ""}} {{loue.aprem ? ("Après-midi") : ""}}</span>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <button class="btn btn-primary" (click)="supprimerBien(bien._id)">Supprimer le bien</button>
+                </div>
             </ng-template>
-            <div>
-                <button class="btn btn-primary" (click)="supprimerBien(bien._id)">Supprimer le bien</button>
-            </div>
+
         </mat-expansion-panel>
     </a>
 

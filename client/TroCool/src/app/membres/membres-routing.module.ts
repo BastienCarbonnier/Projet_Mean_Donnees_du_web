@@ -12,11 +12,13 @@ import { ListeResaServicesMembreComponent } from './liste-resa-services-membre/l
 import { InscriptionComponent } from './inscription/inscription.component';
 
 import { AuthGuardService } from '../auth-guard.service';
+import { RoleGuardService } from '../role-guard.service';
 
 const routes: Routes = [
     {
-        path: '',
-        component: ListeMembresComponent
+        path: 'membres',
+        component: ListeMembresComponent,
+        canActivate: [RoleGuardService]
     },
     {
         path: 'services',

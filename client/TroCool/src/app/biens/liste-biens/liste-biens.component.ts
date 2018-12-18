@@ -44,6 +44,7 @@ export class ListeBiensComponent implements OnInit {
                     if (res.err) alert("Erreur lors de l'emprunt du bien\n\n" + JSON.stringify(res.code));
                     else{
                         alert("Emprunt réussi");
+                        this.auth.ratio = parseInt(this.auth.ratio) - 1;
                         this.service.getBiens().subscribe(res =>{
                             this.biens = res;
                         });

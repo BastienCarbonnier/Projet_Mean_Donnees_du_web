@@ -38,6 +38,7 @@ var createMembre = function (db,params,callback){
         if (!isInDatabase){
             getNewId(db,(err,newid)=>{
                 new_membre._id = newid;
+                new_membre.ratio = 0;
                 async.forEachOf(params, (value, key, callback) => {
                     new_membre[key] = value;
                     callback();
@@ -91,7 +92,8 @@ var checkLoginAndPassword = function (db,params,callback){
             "id" : documents[0]._id,
             "admin" : admin,
             "nom": documents[0].nom,
-            "prenom": documents[0].prenom
+            "prenom": documents[0].prenom,
+            "ratio": documents[0].ratio
         };
         callback(result);
     });

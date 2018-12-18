@@ -13,7 +13,7 @@
                 <a *ngFor="let creneau of resa.creneaux">
                     <div>
                         <h6>{{creneau.date|date:"dd:LLL:yyyy"}}</h6>
-                        <span>{{creneau.matin ? ("Matin") : ""}}, {{creneau.aprem ? ("Après-midi") : ""}}</span>
+                        <span>{{creneau.matin ? ("Matin") : ""}} {{creneau.aprem ? ("Après-midi") : ""}}</span>
                     </div>
                 </a>
             </mat-expansion-panel>

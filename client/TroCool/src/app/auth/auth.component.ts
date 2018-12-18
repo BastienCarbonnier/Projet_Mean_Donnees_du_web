@@ -34,6 +34,7 @@ export class AuthComponent implements OnInit {
                     this.auth.nom = val.nom;
                     this.auth.prenom = val.prenom;
                     this.auth.admin = val.admin;
+                    this.auth.ratio = val.ratio;
                     console.log(this.auth);
 
                     this.cookie.set('isLoggedIn','true');
@@ -41,7 +42,8 @@ export class AuthComponent implements OnInit {
                     this.cookie.set('nom',val.nom);
                     this.cookie.set('prenom',val.prenom);
                     this.cookie.set('id', val.id);
-                    if (val.admin) this.cookie.set('admin', val.admin);
+                    this.cookie.set('admin', val.admin);
+                    this.cookie.set('ratio', val.ratio);
 
                     this.router.navigateByUrl("/membre/propositions");
             }

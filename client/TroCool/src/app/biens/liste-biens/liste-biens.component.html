@@ -13,9 +13,6 @@
 
             <ng-template matExpansionPanelContent>
                 <div>
-                    DispoChoisi: {{dispoChoisi | json}}
-                </div>
-                <div>
                     <p>Veuillez choisir les disponibilités qui vous conviennent : </p>
                     <kendo-multiselect [data]="biens[i].dates"
                     [(ngModel)]="dispoChoisi"

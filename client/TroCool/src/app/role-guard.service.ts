@@ -7,7 +7,7 @@ export class RoleGuardService implements CanActivate {
     constructor(public authService: AuthService, public router: Router) {}
 
     canActivate(): boolean {
-
+        console.log(this.authService.admin)
         if (!this.authService.isLoggedIn) {
             //this.router.navigate(['login']);
             alert("Veuillez vous authentifier au préalable.");

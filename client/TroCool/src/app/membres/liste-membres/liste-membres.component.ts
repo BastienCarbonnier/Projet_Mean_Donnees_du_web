@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembresService } from '../membres.service';
-
+import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-liste-membres',
   templateUrl: './liste-membres.component.html',
@@ -8,7 +8,8 @@ import { MembresService } from '../membres.service';
 })
 export class ListeMembresComponent implements OnInit {
 
-  constructor(public service: MembresService) { }
+  constructor(public service: MembresService,
+              public auth: AuthService) { }
 
   public membres:Object[];
 

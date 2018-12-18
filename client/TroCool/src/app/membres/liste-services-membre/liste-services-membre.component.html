@@ -3,7 +3,7 @@
 
 <h6 *ngIf="services.length == 0">Aucun services présents</h6>
 <mat-accordion class="services">
-    <a *ngFor="let service of services">
+    <a *ngFor="let service of services; index as i">
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -14,7 +14,31 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div><span>Id: </span>{{service._id}}</div>
-            <div><span>Possesseur: </span>{{auth.prenom | titlecase}} {{auth.nom | titlecase}}</div>
+            <ng-template matExpansionPanelContent>
+                <div>
+                    <h6>Créneaux Disponibles :</h6>
+                    <a *ngFor="let creneau of service.dates">
+                        <div>
+                            <div class="date"><span>{{creneau.date|date:"dd:LLL:yyyy"}}</span></div>
+                            <span>{{creneau.matin ? ("Matin") : ""}} {{creneau.aprem ? ("Après-midi") : ""}}</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div>
+                    <h6>Créneaux Occupés :</h6>
+                    <a *ngFor="let loue of service.dates_loue">
+                        <div>
+                            <div class="date"><span>{{loue.date|date:"dd:LLL:yyyy"}}</span></div>
+                            <span>{{loue.matin ? ("Matin") : ""}} {{loue.aprem ? ("Après-midi") : ""}}</span>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <button class="btn btn-primary" (click)="supprimerService(service._id)">Supprimer le service</button>
+                </div>
+            </ng-template>
+
         </mat-expansion-panel>
     </a>
 </mat-accordion>

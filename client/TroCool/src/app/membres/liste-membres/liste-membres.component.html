@@ -1,16 +1,24 @@
 <h3>Listes des Membres</h3>
-<div class="membres">
-  <a *ngFor="let membre of membres">
-    <div class="badge">
-      <h4>{{membre.prenom | titlecase}} {{membre.nom | uppercase}}</h4>
-      <div><span>id: </span>{{membre._id}}</div>
-      <div><span>email: </span>{{membre.email}}</div>
-      <div><span>role: </span>{{membre.role}}</div>
-    </div>
-    <div>
-      <label>email:
-        <input [(ngModel)]="membre.email" placeholder="email">
-      </label>
-    </div>
-  </a>
-</div>
+<mat-accordion class="membres">
+    <a *ngFor="let membre of membres; index as i">
+        <mat-expansion-panel *ngIf="membre._id != auth.id">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6>{{membre.prenom | titlecase}} {{membre.nom | uppercase}}</h6>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>Ratio : {{membre.ratio}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+                <div>
+                    Email : {{membre.email}}
+                </div>
+                <button class="btn btn-primary" (click)="notifierMembre(i)">Prévenir le membre</button>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </a>
+
+</mat-accordion>
